@@ -54,7 +54,17 @@ cover/
 # Translations
 *.mo
 *.pot
+
+# Project-specific
 Data/
+models/*.joblib
+mlruns/
+infra/.terraform/
+infra/terraform.tfstate
+infra/terraform.tfstate.backup
+infra/*.tfplan
+*.tfvars
+
 # Django stuff:
 *.log
 local_settings.py

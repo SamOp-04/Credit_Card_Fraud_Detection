@@ -21,12 +21,12 @@ class TransactionRequest(BaseModel):
 
     features: list[float] = Field(
         ...,
-        min_length=29,
+        min_length=30,
         max_length=30,
-        description="Transaction feature vector (V1-V28, Amount, and optionally Time)",
+        description="Transaction feature vector: Time, V1-V28, Amount (30 features)",
     )
 
-    model_config = {"json_schema_extra": {"examples": [{"features": [0.0] * 29}]}}
+    model_config = {"json_schema_extra": {"examples": [{"features": [0.0] * 30}]}}
 
 
 class BatchRequest(BaseModel):

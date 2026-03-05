@@ -1,0 +1,48 @@
+# Version control
+.git
+.github
+.gitignore
+
+# Data files (model is pre-built and copied separately)
+Data/
+notebooks/
+
+# Python artifacts
+__pycache__
+*.py[cod]
+*.egg-info
+dist/
+build/
+.eggs/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# MLflow local runs
+mlruns/
+mlartifacts/
+
+# Testing & coverage
+htmlcov/
+.coverage
+.pytest_cache/
+tests/
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker
+Dockerfile
+docker-compose.yaml
+.dockerignore
+
+# Docs
+README.md
+*.md

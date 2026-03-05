@@ -59,7 +59,7 @@ async def test_predict_no_model():
     state.model = None
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://test") as client:
-        response = await client.post("/predict", json={"features": [0.0] * 29})
+        response = await client.post("/predict", json={"features": [0.0] * 30})
     assert response.status_code == 503
 
 
@@ -70,7 +70,7 @@ async def test_predict_legitimate(mock_model):
     state.config = {"evaluation": {"threshold": 0.5}}
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://test") as client:
-        response = await client.post("/predict", json={"features": [0.0] * 29})
+        response = await client.post("/predict", json={"features": [0.0] * 30})
     assert response.status_code == 200
     data = response.json()
     assert data["is_fraud"] is False
@@ -84,7 +84,7 @@ async def test_predict_fraud(mock_model_fraud):
     state.config = {"evaluation": {"threshold": 0.5}}
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://test") as client:
-        response = await client.post("/predict", json={"features": [0.0] * 29})
+        response = await client.post("/predict", json={"features": [0.0] * 30})
     assert response.status_code == 200
     data = response.json()
     assert data["is_fraud"] is True
@@ -99,7 +99,7 @@ async def test_predict_invalid_features():
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://test") as client:
         response = await client.post("/predict", json={"features": [0.0] * 5})
-    assert response.status_code == 422
+    assert response.status_code == 422  # Rejected: needs exactly 30 features
 
 
 @pytest.mark.asyncio
@@ -112,7 +112,7 @@ async def test_batch_predict(mock_model):
     async with AsyncClient(transport=transport, base_url="http://test") as client:
         response = await client.post(
             "/predict/batch",
-            json={"transactions": [{"features": [0.0] * 29}, {"features": [1.0] * 29}]},
+            json={"transactions": [{"features": [0.0] * 30}, {"features": [1.0] * 30}]},
         )
     assert response.status_code == 200
     data = response.json()
