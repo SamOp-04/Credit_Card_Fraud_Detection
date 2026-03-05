@@ -1,0 +1,22 @@
+artifact_path: file:///C:/Users/samas/Credit_Card_Fraud_Detection/mlruns/1/models/m-b6c251e6726042cc9c03f7027a87c9aa/artifacts
+flavors:
+  python_function:
+    data: model.ubj
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.xgboost
+    python_version: 3.10.11
+  xgboost:
+    code: null
+    data: model.ubj
+    model_class: xgboost.sklearn.XGBClassifier
+    model_format: ubj
+    xgb_version: 3.2.0
+mlflow_version: 3.10.0
+model_id: m-b6c251e6726042cc9c03f7027a87c9aa
+model_size_bytes: 708750
+model_uuid: m-b6c251e6726042cc9c03f7027a87c9aa
+prompts: null
+run_id: 8fe295627803443da3556fa9ecc2e6a0
+utc_time_created: '2026-03-05 07:29:32.988091'
