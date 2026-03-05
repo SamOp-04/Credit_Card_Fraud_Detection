@@ -51,7 +51,9 @@ class ModelEvaluator:
             for key, value in metrics.items():
                 mlflow.log_metric(key, value)
 
-        logger.info("evaluation_complete", **{k: round(v, 4) for k, v in metrics.items()})
+        logger.info(
+            "evaluation_complete", **{k: round(v, 4) for k, v in metrics.items()}
+        )
         return metrics
 
     def find_optimal_threshold(
@@ -64,7 +66,9 @@ class ModelEvaluator:
         # Compute F1 for each threshold
         f1_scores = 2 * (precisions * recalls) / (precisions + recalls + 1e-8)
         optimal_idx = np.argmax(f1_scores)
-        optimal_threshold = float(thresholds[optimal_idx]) if optimal_idx < len(thresholds) else 0.5
+        optimal_threshold = (
+            float(thresholds[optimal_idx]) if optimal_idx < len(thresholds) else 0.5
+        )
 
         result = {
             "optimal_threshold": round(optimal_threshold, 4),
@@ -80,4 +84,6 @@ class ModelEvaluator:
         """Generate a human-readable classification report."""
         y_proba = model.predict_proba(X_test)[:, 1]
         y_pred = (y_proba >= self.threshold).astype(int)
-        return classification_report(y_test, y_pred, target_names=["Legitimate", "Fraud"])
+        return classification_report(
+            y_test, y_pred, target_names=["Legitimate", "Fraud"]
+        )

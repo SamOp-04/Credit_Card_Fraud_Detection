@@ -56,7 +56,7 @@ cover/
 *.pot
 
 # Project-specific
-Data/
+Data/creditcard.csv
 models/*.joblib
 mlruns/
 infra/.terraform/

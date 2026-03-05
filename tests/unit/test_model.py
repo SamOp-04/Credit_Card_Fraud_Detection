@@ -33,7 +33,10 @@ def config():
             "smote_ratio": 0.5,
             "cross_validation_folds": 3,
         },
-        "evaluation": {"threshold": 0.5, "metrics": ["precision", "recall", "f1_score"]},
+        "evaluation": {
+            "threshold": 0.5,
+            "metrics": ["precision", "recall", "f1_score"],
+        },
         "serving": {"model_path": "models/test_model.joblib"},
     }
 

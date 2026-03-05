@@ -6,7 +6,6 @@ from contextlib import asynccontextmanager
 
 import joblib
 import numpy as np
-import pandas as pd
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 
@@ -15,6 +14,7 @@ from src.utils.logger import logger
 
 
 # ── Pydantic schemas ──────────────────────────────────────────────────────────
+
 
 class TransactionRequest(BaseModel):
     """Single transaction for prediction."""
@@ -62,6 +62,7 @@ class HealthResponse(BaseModel):
 
 # ── Application state ─────────────────────────────────────────────────────────
 
+
 class AppState:
     model = None
     scaler = None
@@ -74,6 +75,7 @@ state = AppState()
 
 
 # ── Lifespan ──────────────────────────────────────────────────────────────────
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):

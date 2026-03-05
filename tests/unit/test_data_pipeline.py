@@ -12,9 +12,22 @@ def sample_config():
     """Minimal config for testing."""
     return {
         "project": {"random_seed": 42},
-        "data": {"raw_path": "Data/creditcard.csv", "processed_dir": "Data/processed", "test_size": 0.2, "val_size": 0.1},
-        "features": {"target_column": "Class", "drop_columns": [], "scale_columns": ["Amount"]},
-        "training": {"sampling_strategy": "none", "smote_ratio": 0.5, "cross_validation_folds": 3},
+        "data": {
+            "raw_path": "Data/creditcard.csv",
+            "processed_dir": "Data/processed",
+            "test_size": 0.2,
+            "val_size": 0.1,
+        },
+        "features": {
+            "target_column": "Class",
+            "drop_columns": [],
+            "scale_columns": ["Amount"],
+        },
+        "training": {
+            "sampling_strategy": "none",
+            "smote_ratio": 0.5,
+            "cross_validation_folds": 3,
+        },
     }
 
 
@@ -59,7 +72,6 @@ class TestDataPipeline:
 
     def test_preprocess_scales_columns(self, pipeline, sample_df):
         """Amount column should be standardized after preprocessing."""
-        original_mean = sample_df["Amount"].mean()
         processed = pipeline.preprocess(sample_df.copy())
         # Scaled column should have ~0 mean
         assert abs(processed["Amount"].mean()) < 0.01

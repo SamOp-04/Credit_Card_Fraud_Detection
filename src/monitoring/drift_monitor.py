@@ -3,7 +3,7 @@
 import pandas as pd
 import numpy as np
 from evidently.report import Report
-from evidently.metric_preset import DataDriftPreset, ClassificationPreset
+from evidently.metric_preset import DataDriftPreset
 
 from src.utils.logger import logger
 
@@ -16,7 +16,9 @@ class ModelMonitor:
         self.reference_data = reference_data
         self.prediction_log: list[dict] = []
 
-    def log_prediction(self, features: list[float], prediction: int, probability: float):
+    def log_prediction(
+        self, features: list[float], prediction: int, probability: float
+    ):
         """Log a single prediction for monitoring."""
         self.prediction_log.append(
             {"features": features, "prediction": prediction, "probability": probability}

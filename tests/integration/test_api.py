@@ -2,7 +2,7 @@
 
 import pytest
 import numpy as np
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock
 from httpx import AsyncClient, ASGITransport
 
 from src.serving.app import app, state
