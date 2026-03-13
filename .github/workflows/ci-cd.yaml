@@ -5,6 +5,13 @@ on:
     branches: [main, develop]
   pull_request:
     branches: [main]
+  workflow_dispatch:
+    inputs:
+      deploy_to_aws:
+        description: "Run AWS build and ECS deploy jobs"
+        required: true
+        default: false
+        type: boolean
 
 jobs:
   # ── Lint & Format ─────────────────────────────────────────────
@@ -60,7 +67,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     needs: test
-    if: github.ref == 'refs/heads/main'
+    if: github.event_name == 'workflow_dispatch' && inputs.deploy_to_aws == true
     outputs:
       image: ${{ steps.build.outputs.image }}
     steps:
@@ -99,7 +106,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    if: github.ref == 'refs/heads/main'
+    if: github.event_name == 'workflow_dispatch' && inputs.deploy_to_aws == true
     environment: production
     steps:
       - uses: actions/checkout@v4
